@@ -55,7 +55,7 @@ ptg_write_line (int fd, struct ptg_line *outline)
     static const uint32_t le2magic = 0x01;
 
     write (fd, outline, sizeof (struct ptg_line));
-    write (fd, lemagic, sizeof (lemagic));
+    write (fd, lemagic, sizeof (lemagic) - 1);
     write (fd, &le2magic, sizeof (uint32_t));
 }
 

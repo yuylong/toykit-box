@@ -51,8 +51,7 @@ ptg_gen_line (uint32_t startip, uint32_t endip,
 static inline void
 ptg_write_line (int fd, struct ptg_line *outline)
 {
-    // Windows will automaticallly fill a '0x0D' before '\n'.
-    static const uint8_t lemagic[] = "HTTP\n";
+    static const uint8_t lemagic[] = "HTTP\r\n";
     static const uint32_t le2magic = 0x01;
 
     write (fd, outline, sizeof (struct ptg_line));
@@ -188,7 +187,7 @@ ptg_gen_phtsk (const char *ipfile, const char *portfile,
     if ( lncnt == 0 )
         return;
 
-    fd = open (tskfile, O_WRONLY | O_CREAT);
+    fd = open (tskfile, O_WRONLY | O_BINARY | O_CREAT | O_TRUNC);
     ptg_write_file_magic (fd);
     write (fd, &lncnt, sizeof (uint32_t));
 

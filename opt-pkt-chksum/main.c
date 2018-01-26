@@ -68,10 +68,7 @@ uint16_t get_16b_sum64 (uint16_t *ptr16, uint32_t len)
     while ( len > 7 ) {
         uint64_t newsum = sum + *ptr64++;
         len -= 8;
-        if ( newsum < sum )
-            sum = newsum + 1;
-        else
-            sum = newsum;
+        sum = newsum + (newsum < sum);
     }
     
     return get_end_partial_csum64 (sum, (uint16_t *)ptr64, len);

@@ -4,4 +4,4 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 LIBS += -lrt
-SOURCES += main.c
+SOURCES += topn.c
